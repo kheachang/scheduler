@@ -5,6 +5,10 @@ import InterviewerList from "components/InterviewerList"
 import Button from "components/Button"
 
 export default function Form(props) {
+
+  const setName = () => {
+
+  }
   return (<main className="appointment__card appointment__card--create">
   <section className="appointment__card-left">
     <form autoComplete="off">
@@ -13,9 +17,7 @@ export default function Form(props) {
         name="name"
         type="text"
         placeholder="Enter Student Name"
-        /*
-          This must be a controlled component
-        */
+        onChange={(event) => {setName(event.target.value)}}
       />
     </form>
     <InterviewerList interviewers={props.interviewers} value={props.id} onChange={setInterviewer} />
