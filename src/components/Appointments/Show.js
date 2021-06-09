@@ -1,4 +1,6 @@
 import React from "react"; 
+import "components/InterviewerListItem";
+import "components/InterviewerList"; 
 
 export default function Show(props) {
 
