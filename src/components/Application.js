@@ -1,6 +1,8 @@
 import React from "react";
 import DayList from 'components/DayList';
-import DaylistItem from 'components/DayListItem'
+import DaylistItem from 'components/DayListItem';
+import Appointment from "components/Appointments";
+
 import { useState } from 'react';
 
 
@@ -83,6 +85,18 @@ export default function Application(props) {
 
   const [day, setDay] = useState('Monday');
 
+  const mappedAppointments = appointments.map(appointment => {
+    return (
+      <>
+      <Appointment 
+        key={appointment.id}
+       {...appointment}
+      />
+      <Appointment key="last" time="5pm" />
+      </>
+    )
+  }
+    )
 
   return (
     <main className="layout">
@@ -104,7 +118,8 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        {mappedAppointments}
+        
       </section>
     </main>
   );
