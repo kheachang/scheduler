@@ -1,11 +1,9 @@
-import React, {userEffect} from "react";
-import DayList from 'components/DayList';
-import DaylistItem from 'components/DayListItem';
+import React, { useEffect } from "react";
+import DayList from "components/DayList";
 import Appointment from "components/Appointments";
-import { useState } from 'react';
+import { useState } from "react";
 import "components/Application.scss";
-const axios = require('axios');
-
+const axios = require("axios");
 
 const appointments = [
   {
@@ -21,8 +19,8 @@ const appointments = [
         id: 1,
         name: "Sylvia Palmer",
         avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
+      },
+    },
   },
   {
     id: 3,
@@ -32,9 +30,9 @@ const appointments = [
       interviewer: {
         id: 2,
         name: "Tori Malcolm",
-        avatar: "https://i.imgur.com/Nmx0Qxo.png"
-      }
-    }
+        avatar: "https://i.imgur.com/Nmx0Qxo.png",
+      },
+    },
   },
   {
     id: 4,
@@ -44,9 +42,9 @@ const appointments = [
       interviewer: {
         id: 3,
         name: "Mildred Nazir",
-        avatar: "https://i.imgur.com/T2WwVfS.png"
-      }
-    }
+        avatar: "https://i.imgur.com/T2WwVfS.png",
+      },
+    },
   },
   {
     id: 5,
@@ -56,28 +54,37 @@ const appointments = [
       interviewer: {
         id: 2,
         name: "Tori Malcolm",
-        avatar: "https://i.imgur.com/Nmx0Qxo.png"
-      }
-    }
-  }
+        avatar: "https://i.imgur.com/Nmx0Qxo.png",
+      },
+    },
+  },
 ];
 
 export default function Application(props) {
+  const [day, setDay] = useState('Monday')
+  const [days, setDays] = useState([]);
 
-  const [day, setDay] = useState([]);
+  // use [day && day] [error && error]
+  useEffect(() => {
+    axios
+      .get("/api/days")
+      .then((res) => {
+        console.log('hello')
+        setDays(res.data);
+      })
+      .catch((error) => {
+        console.log('error');
+      });
+  }, []);
 
-  const mappedAppointments = appointments.map(appointment => {
+  const mappedAppointments = appointments.map((appointment) => {
     return (
       <>
-      <Appointment 
-        key={appointment.id}
-       {...appointment}
-      />
-      <Appointment key="last" time="5pm" />
+        <Appointment key={appointment.id} {...appointment} />
+        <Appointment key="last" time="5pm" />
       </>
-    )
-  }
-    )
+    );
+  });
 
   return (
     <main className="layout">
@@ -89,8 +96,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-
-        <DayList days={days} day={day} setDay={setDay} /> /* props*/ 
+          <DayList days={days} day={day} setDay={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -98,11 +104,7 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">
-        {mappedAppointments}
-        
-      </section>
+      <section className="schedule">{mappedAppointments}</section>
     </main>
   );
 }
-
