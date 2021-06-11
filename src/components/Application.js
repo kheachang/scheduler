@@ -3,13 +3,13 @@ import DayList from "components/DayList";
 import Appointment from "components/Appointments";
 import { useState } from "react";
 import "components/Application.scss";
-import { getAppointmentsForDay } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview } from "helpers/selectors";
 const axios = require("axios");
 
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
-    days: [],
+    days: [], 
     appointments: {},
     interviewers: {},
   });
