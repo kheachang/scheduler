@@ -16,6 +16,16 @@ export default function Application(props) {
 
   const setDay = (day) => setState((prev) => ({ ...prev, day }));
   const dailyAppointments = getAppointmentsForDay(state, state.day)
+  const schedule = dailyAppointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    
+      return (
+        <>
+          <Appointment key={appointment.id} {...appointment} />
+          <Appointment key="last" time="5pm" />
+        </>
+      );
+    });
   
 
   useEffect(() => {Promise.all([
@@ -32,15 +42,8 @@ export default function Application(props) {
       }))
     });
   })
-
-  const mappedAppointments = dailyAppointments.map((appointment) => {
-    return (
-      <>
-        <Appointment key={appointment.id} {...appointment} />
-        <Appointment key="last" time="5pm" />
-      </>
-    );
-  });
+  
+ 
 
   return (
     <main className="layout">
@@ -60,6 +63,6 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">{mappedAppointments}</section>
+      <section className="schedule">{schedule}</section>
     </main>
   )};
