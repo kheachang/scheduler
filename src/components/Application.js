@@ -3,47 +3,55 @@ import DayList from "components/DayList";
 import Appointment from "components/Appointments";
 import { useState } from "react";
 import "components/Application.scss";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import {
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay,
+} from "helpers/selectors";
 const axios = require("axios");
 
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
-    days: [], 
+    days: [],
     appointments: {},
     interviewers: {},
   });
 
   const setDay = (day) => setState((prev) => ({ ...prev, day }));
-  const dailyAppointments = getAppointmentsForDay(state, state.day)
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-    
-      return (
-        <>
-          <Appointment key={appointment.id} {...appointment} />
-          <Appointment key="last" time="5pm" />
-        </>
-      );
-    });
-  
+    const interviewers = getInterviewersForDay(state, state.day);
+    return (
+      <>
+        <Appointment
+          key={appointment.id}
+          id={appointment.id}
+          time={appointment.time}
+          interview={interview}
+          interviewers={interviewers}
+        />
+        <Appointment key="last" time="5pm" />
+      </>
+    );
+  });
 
-  useEffect(() => {Promise.all([
-    axios.get("/api/days"),
-    axios.get("/api/appointments"),
-    axios.get("api/interviewers"),
-  ]).then(res => {
+  useEffect(() => {
+    Promise.all([
+      axios.get("/api/days"),
+      axios.get("/api/appointments"),
+      axios.get("api/interviewers"),
+    ]).then((res) => {
       // console.log(res.data)
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         days: res[0].data,
         appointments: res[1].data,
         interviewers: res[2].data,
-      }))
+      }));
     });
-  })
-  
- 
+  });
 
   return (
     <main className="layout">
@@ -65,4 +73,5 @@ export default function Application(props) {
       </section>
       <section className="schedule">{schedule}</section>
     </main>
-  )};
+  );
+}
