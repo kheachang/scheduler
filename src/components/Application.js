@@ -10,7 +10,7 @@ import {
 } from "helpers/selectors";
 const axios = require("axios");
 
-export default function Application(props) {
+export default function Application() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -18,6 +18,18 @@ export default function Application(props) {
     interviewers: {},
   });
 
+  // change local state when we book interviews
+  const bookInterview = (id, interview) => {
+    console.log(id, interview);
+  };
+
+  const save = (name, interviewer) => {
+    const interview = {
+      student: name,
+      interviewer
+    };
+  
+  }
   const setDay = (day) => setState((prev) => ({ ...prev, day }));
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const schedule = dailyAppointments.map((appointment) => {
