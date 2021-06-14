@@ -41,6 +41,23 @@ export default function Application() {
     return axios.put(`/api/appointments/${id}`, {interview}).then(() => {setState({...state, appointments})})
   };
 
+  function cancelInterview(id) {
+    console.log(id)
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+
+     return axios.delete(`/api/appointments/${id}`).then(() => {
+       return setState({...state, appointments})
+     })
+
+  }
 const setDay = (day) => setState((prev) => ({ ...prev, day }));
 const dailyAppointments = getAppointmentsForDay(state, state.day);
 const schedule = dailyAppointments.map((appointment) => {
@@ -55,6 +72,7 @@ const schedule = dailyAppointments.map((appointment) => {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     </>
   );
