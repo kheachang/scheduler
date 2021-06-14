@@ -22,19 +22,24 @@ export default function Application() {
   function bookInterview(id, interview) {
     console.log(id, interview);
 
+    // add new interview into appointment id
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
     };
+
+    // add it into appointments
     const appointments = {
       ...state.appointments,
       [id]: appointment,
     };
 
+    console.log("interview", interview)
+    console.log("appointments", appointments)
+
     // make api request to update the state
     return axios.put(`/api/appointments/${id}`, {interview}).then(() => {setState({...state, appointments})})
   };
-    // return setState({ ...state, appointments })};
 
 const setDay = (day) => setState((prev) => ({ ...prev, day }));
 const dailyAppointments = getAppointmentsForDay(state, state.day);

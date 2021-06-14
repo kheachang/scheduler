@@ -12,7 +12,6 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
-  
 
 export default function Appointment(props) {
 
@@ -32,7 +31,6 @@ export default function Appointment(props) {
       .then(() => {transition(SHOW)});
   };
 
-  
   return (
     <>
       <article className="appointment"></article>
