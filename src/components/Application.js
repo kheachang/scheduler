@@ -31,7 +31,10 @@ export default function Application() {
       [id]: appointment,
     };
 
-    return setState({ ...state, appointments })};
+    // make api request to update the state
+    return axios.put(`/api/appointments/${id}`, {interview}).then(() => {setState({...state, appointments})})
+  };
+    // return setState({ ...state, appointments })};
 
 const setDay = (day) => setState((prev) => ({ ...prev, day }));
 const dailyAppointments = getAppointmentsForDay(state, state.day);
