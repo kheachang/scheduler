@@ -20,16 +20,23 @@ export default function Application() {
 
   // change local state when we book interviews
   const bookInterview = (id, interview) => {
-    console.log(id, interview);
+    console.log("bookInterview", id, interview);
+    
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    console.log(appointment, appointments);
+
+    return setState({ ...state, appointments });
+
   };
 
-  const save = (name, interviewer) => {
-    const interview = {
-      student: name,
-      interviewer
-    };
-  
-  }
   const setDay = (day) => setState((prev) => ({ ...prev, day }));
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const schedule = dailyAppointments.map((appointment) => {
@@ -43,8 +50,8 @@ export default function Application() {
           time={appointment.time}
           interview={interview}
           interviewers={interviewers}
+          bookInterview={bookInterview}
         />
-        <Appointment key="last" time="5pm" />
       </>
     );
   });
@@ -63,7 +70,7 @@ export default function Application() {
         interviewers: res[2].data,
       }));
     });
-  });
+  }, []);
 
   return (
     <main className="layout">
@@ -83,7 +90,9 @@ export default function Application() {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">{schedule}</section>
+      <section className="schedule">{schedule}         
+        <Appointment key="last" time="5pm" />
+    </section>
     </main>
   );
 }
