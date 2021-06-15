@@ -39,6 +39,7 @@ export default function Application() {
 
     // make api request to update the state
     return axios.put(`/api/appointments/${id}`, {interview}).then(() => {setState({...state, appointments})})
+    
   };
 
   function cancelInterview(id) {
