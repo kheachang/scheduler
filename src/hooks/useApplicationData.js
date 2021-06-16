@@ -12,9 +12,10 @@ const useApplicationData = () => {
 
   const setDay = (day) => setState((prev) => ({ ...prev, day }));
 
+
   // change local state when we book interviews
   function bookInterview(id, interview) {
-    console.log(id, interview);
+    console.log("id,", id, "interview", interview);
 
     // add new interview into appointment id
     const appointment = {
@@ -33,7 +34,10 @@ const useApplicationData = () => {
 
     // make api request to update the state
     return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
-      setState({ ...state, appointments });
+      setState({
+        ...state,
+        appointments,
+      });
     });
   }
 
