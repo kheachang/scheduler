@@ -15,7 +15,7 @@ import { render } from "@testing-library/react";
 import Application from "components/Application";
 
 
-afterEach(cleanup);
+// afterEach(cleanup);
 
 
 /*
