@@ -37,10 +37,9 @@ export default function Appointment(props) {
       .then(() => {
         transition(SHOW);
       })
-      // replace saving mode
-      // .catch((error) => {
-      //   transition(ERROR_SAVE, true);
-      // });
+      .catch((error) => {
+        transition(ERROR_SAVE, true);
+      });
   };
 
   const confirmDelete = () => {

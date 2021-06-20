@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { setInterviewer } from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
 
 import Button from "components/Button";
-import { action } from "@storybook/addon-actions";
 
 export default function Form(props) {
 
@@ -31,9 +29,7 @@ export default function Form(props) {
     props.onCancel();
   };
 
-  const save = () => {
-    props.onSave(name, interviewer);
-  }
+  
 
   return (
     <main className="appointment__card appointment__card--create">

@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 const axios = require("axios");
 
@@ -95,8 +94,6 @@ const useApplicationData = () => {
 
     let days = state.days
     days[dayOfWeek] = day;
-
-    const url =`http://localhost:8001/api/appointments/${id}`;
     
     return axios.delete(`/api/appointments/${id}`).then(() => {
       return setState({ ...state, appointments });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 //sets initial argument to mode state
 export default function useVisualMode(initial) {
