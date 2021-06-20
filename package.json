@@ -20,8 +20,6 @@
     "build-storybook": "build-storybook -s public",
     "test:server": "NODE_ENV=test npm start",
     "cypress": "cypress open -P ."
-
-
   },
   "browserslist": {
     "production": [

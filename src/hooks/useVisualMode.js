@@ -16,7 +16,6 @@ export default function useVisualMode(initial) {
       history.push(newMode);
     }
     setMode(newMode);
-
   }
 
   // remove the last item in stack
@@ -28,8 +27,6 @@ export default function useVisualMode(initial) {
     newHistory.pop();
     setMode(newHistory[newHistory.length - 1]);
     setHistory(newHistory);
-
-     
   }
 
   return { mode, transition, back };

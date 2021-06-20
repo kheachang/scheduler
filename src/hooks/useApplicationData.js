@@ -17,10 +17,10 @@ const useApplicationData = () => {
       Tuesday: 1,
       Wednesday: 2,
       Thursday: 3,
-      Friday: 4
-    }
-    return dayOfWeek[day]
-  }
+      Friday: 4,
+    };
+    return dayOfWeek[day];
+  };
   // change local state when we book interviews
   function bookInterview(id, interview) {
     console.log("id,", id, "interview", interview);
@@ -37,28 +37,26 @@ const useApplicationData = () => {
       [id]: appointment,
     };
 
-
-    const dayOfWeek = findDay(state.day)
+    const dayOfWeek = findDay(state.day);
     let day = {
       ...state.days[dayOfWeek],
-      spots: state.days[dayOfWeek]
-    }
+      spots: state.days[dayOfWeek],
+    };
 
     if (!state.appointments[id].interview) {
       day = {
         ...state.days[dayOfWeek],
-        spots: state.days[dayOfWeek].spots - 1
-      } 
+        spots: state.days[dayOfWeek].spots - 1,
+      };
     } else {
       day = {
         ...state.days[dayOfWeek],
-        spots: state.days[dayOfWeek].spots
-      } 
+        spots: state.days[dayOfWeek].spots,
+      };
     }
 
-    let days = state.days
+    let days = state.days;
     days[dayOfWeek] = day;
-
 
     console.log("interview", interview);
     console.log("appointments", appointments);
@@ -84,17 +82,16 @@ const useApplicationData = () => {
       [id]: appointment,
     };
 
-
-    const dayOfWeek = findDay(state.day)
+    const dayOfWeek = findDay(state.day);
 
     const day = {
       ...state.days[dayOfWeek],
-      spots: state.days[dayOfWeek].spots + 1
-    }
+      spots: state.days[dayOfWeek].spots + 1,
+    };
 
-    let days = state.days
+    let days = state.days;
     days[dayOfWeek] = day;
-    
+
     return axios.delete(`/api/appointments/${id}`).then(() => {
       return setState({ ...state, appointments });
     });
