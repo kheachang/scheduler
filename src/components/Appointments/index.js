@@ -30,8 +30,14 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
+    
+    if (interviewer === null) {
+      return transition(ERROR_SAVE)
+    }
+
 
     transition(SAVING);
+    
     props
       .bookInterview(props.id, interview)
       .then(() => {
