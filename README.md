@@ -32,4 +32,6 @@ npm test
 npm run storybook
 ```
 ## Screenshots
-
+![Schedule View](https://github.com/kchang-code/scheduler/blob/master/docs/Screen%20Shot%202021-06-25%20at%2010.43.45%20AM.png?raw=true)
+![Create interview](https://github.com/kchang-code/scheduler/blob/master/docs/Screen%20Shot%202021-06-25%20at%2010.44.01%20AM.png?raw=true)
+![Delete interview confirmation](https://github.com/kchang-code/scheduler/blob/master/docs/Screen%20Shot%202021-06-25%20at%2010.44.14%20AM.png?raw=true)
