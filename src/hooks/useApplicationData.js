@@ -23,7 +23,6 @@ const useApplicationData = () => {
   };
   // change local state when we book interviews
   function bookInterview(id, interview) {
-    console.log("id,", id, "interview", interview);
 
     // add new interview into appointment id
     const appointment = {
@@ -58,9 +57,6 @@ const useApplicationData = () => {
     let days = state.days;
     days[dayOfWeek] = day;
 
-    console.log("interview", interview);
-    console.log("appointments", appointments);
-
     // make api request to update the state
     return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
       setState({
@@ -71,7 +67,6 @@ const useApplicationData = () => {
   }
 
   function cancelInterview(id) {
-    console.log(id);
 
     const appointment = {
       ...state.appointments[id],
@@ -103,7 +98,6 @@ const useApplicationData = () => {
       axios.get("/api/appointments"),
       axios.get("api/interviewers"),
     ]).then((res) => {
-      // console.log(res.data)
       setState((prev) => ({
         ...prev,
         days: res[0].data,
